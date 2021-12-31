@@ -1,2 +1,19 @@
 # boggle-stats
-A brief set of Python tools for statistical analysis of the game of Boggle.
+A brief set of (somewhat incomplete) Python tools for statistical analysis of the game of Boggle.
+
+## boggleStats.py
+This program allows you to interact with a custom shell for analyzing games of Boggle. Depends on PyDictionary for word definition. It is currently written with Big Boggle in mind (using a 5x5 board instead of a 4x4 board) but the board class accepts any board dimensions and so it is easy to rewrite the program a bit for your needs. The correct list of dice used in Big Boggle is hard-coded into the program, but you can replace it with whatever you want. This was not written for public release in mind, as you can imagine. boggleStats.py uses Boggle_Dictionary.txt as its English dictionary, which is important if you're some random person who found this on Github because I made this program specifically tailored to my own special set of Boggle house rules that I use when I play with my family, and the list of legal words reflects this. In *our* version of Boggle (which we find far superior) we make all “simple” plurals (nouns with simply an “s” or an “es” tacked on the end) illegal, as well as equally simple adverbs and tenses of verbs, such as “singing”, where “ing” is tacked on the end. The rule of thumb that we use is that it must have its own entry in the dictionary. And not just any dictionary, mind you. Any online dictionary you use will have an entry for just about every random string of four or five letters your throw at it. This is our gripe with Words with Friends. We also only allow words at a minimum of 4 letters, though most recently we’ve started playing with a 5 letter minimum on Big Boggle. So, to trim out all the fat and find a list of words that is consistent with our house rules, I found the easiest option was to download a plaintext version of the official Scrabble dictionary, and write a program to trim out all the words I don’t want from it. This is what wordListCreatorCollins.py does. It trims out about 100,000 words from the 270,000 words in the original list. You’ll probably want to go in and edit the code a bit to generate your own word list if you disagree with my rules. Anyway, here’s what you can do in the boggleStats shell:
+
+|Command|Syntax|Operation|
+|--------|------------------|----------------------------------------------------|
+|exit|exit|Exits the shell.|
+|board|board|Displays the current Boggle board's letter grid.|
+|clear|clear|Clears the terminal windows.|
+|shake|shake|Randomizes the current Boggle board.|
+|dict|dict word|Defines the word using PyDictionary and states whether the word is legal using Boggle_Dictionary.txt|
+|count|count n|Counts from zero to n-1. An excuse to show off the integerName() function I made for this program. Works up to the nine hundred ninety nine quadrillion nine hundred ninety nine trillion nine hundred ninety nine billion nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine before it breaks.|
+|stats|stats|Returns a succinct set of statistics for the most recent word list that was calculated. I’m working on a standalone application using sqlite3 that will expand upon this.|
+|permlist|permlist depth|Creates a table of every legal permutation of letters on the Boggle board at a certain depth (permutation length). This is not required to do anything, it was just really useful as a way to test my permutation table routine as it was integral  to making an efficient word search algorithm.|
+|search|search word|Searches for a word on the Boggle board, and checks if it is a legal word according to the dictionary.|
+|wordlist|wordlist filename|Finds every legal word in the current Boggle board and stores the list in plaintext at wordlist.txt, unless you specify a specific filename.|
+|sim|sim n|Simulates n Boggle boards and does a lot of number crunching. Saves all the letter grids and word lists to Boggle_Simulation.txt.|
